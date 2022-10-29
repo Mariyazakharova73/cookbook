@@ -32,8 +32,8 @@ function FullInfo() {
       <div className="info__container">
         <h2 className="info__title">{info.title}</h2>
         <div className="card__info">
-          <img className="card__info-img" src={info.types ? greenCircle : redCircle} alt="hhh" />
-          <p>Сложность приготовления: {info.types ? 'сложно' : 'легко'}</p>
+          {/* <img className="card__info-img" src={info.types ? greenCircle : redCircle} alt="hhh" /> */}
+          <p>Сложность приготовления: {info.types}</p>
         </div>
         <p>Ингредиенты: {info.ingredients}</p>
         <h3>Приготовление</h3>

@@ -3,15 +3,17 @@ import Search from './Search';
 import CardList from './CardList';
 import Sort from './Sort';
 import axios from 'axios';
+import { useDispatch } from 'react-redux'
+import { setCards } from '../redux/slices/cardsSlice'
 
-function Home() {
+function Home({onCardDelete}) {
   const [sortType, setSortType] = React.useState({
     name: 'алфавиту (а-я)',
     sortProperty: '-title',
   });
-  const [arr, setArr] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [searchValue, setSearchValue] = React.useState('');
+  const dispatch = useDispatch()
 
   const getInfo = async () => {
     const sortBy = sortType.sortProperty.replace('-', '');
@@ -23,7 +25,8 @@ function Home() {
       const res = await axios.get(
         `https://635add296f97ae73a6387aaa.mockapi.io/items?&sortBy=${sortBy}&order=${order}${search}`
       );
-      setArr(res.data);
+      dispatch(setCards(res.data))
+      //console.log(res.data)
     } catch (err) {
       console.log(err);
     } finally {
@@ -39,7 +42,7 @@ function Home() {
     <>
       <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)} />
-      <CardList arr={arr} loading={loading} />
+      <CardList loading={loading} onCardDelete={onCardDelete}/>
     </>
   );
 }

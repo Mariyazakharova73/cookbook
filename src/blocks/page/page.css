@@ -43,14 +43,12 @@ body {
   margin-left: auto;
 }
 
-.header__button {
+.button {
   color: black;
   background-color: transparent;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 15px;
   color: var(--color-text);
   background-color: var(--color-button);
-  height: 48px;
   border: none;
   border-radius: 20px;
   padding: 10px 10px;
@@ -236,6 +234,11 @@ body {
 .card__info-img {
   width: 20px;
   height: 20px;
+}
+
+.card__button-container {
+  display: flex;
+  gap: 20px;
 }
 
 .info {

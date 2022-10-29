@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux'
 import { setCards } from '../redux/slices/cardsSlice'
 
-function Home({onCardDelete}) {
+function Home({onCardDelete, handlePopupEditOpen, handleLikeCard}) {
   const [sortType, setSortType] = React.useState({
     name: 'алфавиту (а-я)',
     sortProperty: '-title',
@@ -26,7 +26,6 @@ function Home({onCardDelete}) {
         `https://635add296f97ae73a6387aaa.mockapi.io/items?&sortBy=${sortBy}&order=${order}${search}`
       );
       dispatch(setCards(res.data))
-      //console.log(res.data)
     } catch (err) {
       console.log(err);
     } finally {
@@ -42,7 +41,7 @@ function Home({onCardDelete}) {
     <>
       <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       <Sort sortType={sortType} onChangeSort={(i) => setSortType(i)} />
-      <CardList loading={loading} onCardDelete={onCardDelete}/>
+      <CardList loading={loading} onCardDelete={onCardDelete} handlePopupEditOpen={handlePopupEditOpen} handleLikeCard={handleLikeCard}/>
     </>
   );
 }

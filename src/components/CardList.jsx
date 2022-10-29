@@ -2,8 +2,9 @@ import React from 'react';
 import CardItem from './CardItem';
 import { useSelector } from 'react-redux';
 
-function CardList({ loading, onCardDelete }) {
+function CardList({ loading, onCardDelete, handlePopupEditOpen, handleLikeCard }) {
   const cards = useSelector((state) => state.cards.cardsArr);
+
   return (
     <div>
       <h1>Рецепты</h1>
@@ -11,7 +12,15 @@ function CardList({ loading, onCardDelete }) {
         {loading ? (
           <div>Загрузка...</div>
         ) : (
-          cards.map((item) => <CardItem key={item.id} {...item} onCardDelete={onCardDelete} />)
+          cards.map((item) => (
+            <CardItem
+              key={item.id}
+              {...item}
+              onCardDelete={onCardDelete}
+              handlePopupEditOpen={handlePopupEditOpen}
+              handleLikeCard={handleLikeCard}
+            />
+          ))
         )}
       </ul>
     </div>

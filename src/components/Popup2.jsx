@@ -1,7 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-function Popup({ isOpen, onClose, onAddCard }) {
+function Popup2({ isOpen, onClose, handleEditCard}) {
   const [inputValues, setInputValues] = React.useState({});
+  const selectedCard = useSelector((state) => state.cards.selectedCard);
+
+  React.useEffect(() => {
+    setInputValues(selectedCard);
+  }, [isOpen]);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -10,8 +16,7 @@ function Popup({ isOpen, onClose, onAddCard }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // Передаём значения управляемых компонентов во внешний обработчик
-    onAddCard({ ...inputValues, likes: [], mainIgredients: '' });
+    handleEditCard(inputValues)
     onClose();
     setInputValues('');
   }
@@ -21,7 +26,7 @@ function Popup({ isOpen, onClose, onAddCard }) {
       <div className="popup__content">
         <button className="popup__close" type="button" onClick={onClose} />
         <div className="popup__form-content">
-          <h2 className="popup__form-heading">Добавить рецепт</h2>
+          <h2 className="popup__form-heading">Редактировать рецепт</h2>
           <form className="popup__form form" onSubmit={handleSubmit}>
             <input
               name="title"
@@ -44,7 +49,7 @@ function Popup({ isOpen, onClose, onAddCard }) {
               minLength="2"
             />
             <input
-              name="type"
+              name="types"
               onChange={handleChange}
               value={inputValues.type || ''}
               className="popup__form-input"
@@ -89,4 +94,4 @@ function Popup({ isOpen, onClose, onAddCard }) {
   );
 }
 
-export default Popup;
+export default Popup2;

@@ -1,7 +1,7 @@
 import React from 'react';
-import redCircle from '../images/red-circle.png';
-import greenCircle from '../images/green-circle.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSelectedCard } from '../redux/slices/cardsSlice';
 
 function CardItem({
   id,
@@ -13,40 +13,69 @@ function CardItem({
   description,
   likes,
   onCardDelete,
+  handlePopupEditOpen,
+  handleLikeCard,
 }) {
-  const [isLikeActive, setIsLikeActive] = React.useState(false);
-  const handleLikeClick = (id) => {
-    setIsLikeActive(!isLikeActive);
+  
+  const dispatch = useDispatch();
+  const selectedCard = {
+    id,
+    title,
+    url,
+    type,
+    mainIgredients,
+    ingredients,
+    description,
+    likes,
+    
+  };
+  const isLiked = selectedCard.likes.some((i) => i.userId === '1111111');
+  const handleLikeClick = () => {
+    if (selectedCard.likes.some((i) => i.userId === '1111111')) {
+      const newArr = selectedCard.likes.filter((obj) => obj.userId !== '1111111');
+      const newCard = { ...selectedCard, likes: newArr };
+      handleLikeCard(newCard);
+    } else {
+      const newArr = [{ userId: '1111111' }, ...selectedCard.likes];
+      const newCard = { ...selectedCard, likes: newArr };
+      handleLikeCard(newCard);
+    }
   };
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = () => {
     onCardDelete(id);
+  };
+
+  const handleEditClick = () => {
+    dispatch(setSelectedCard(selectedCard));
+    handlePopupEditOpen();
   };
 
   return (
     <>
       <li className="card__item">
         <Link to={`/${id}`}>
-          <img className="card__image" src={url} alt="bbb" />
+          <img className="card__image" src={url} alt={`${title}.`} />
         </Link>
         <div className="card__wrapper">
           <h2 className="card__title">{title}</h2>
           <div className="card__info">
-            {/* <img className="card__info-img" src={type ? greenCircle : redCircle} alt="hhh" /> */}
             <p>Сложность приготовления: {type}</p>
           </div>
           <p className="card__ingredients">{`Базовые ингредиенты: ${mainIgredients}`}</p>
           <div className="button-like__container">
             <button
-              onClick={() => handleLikeClick(id)}
-              className={`button-like ${isLikeActive ? 'button-like_active' : ''}`}
+              onClick={handleLikeClick}
+              className={`button-like ${isLiked ? 'button-like_active' : ''}`}
               type="button"
             />
-            <p className="button-like__number">{likes}</p>
+            <p className="button-like__number">{likes.length}</p>
           </div>
           <div className="card__button-container">
-            <button className="button">Редактировать</button>
-            <button className="button" onClick={() => handleDeleteClick(id)}>
+            <button className="button" onClick={handleEditClick}>
+              Редактировать
+            </button>
+            <button className="button" onClick={handleDeleteClick}>
               Удалить
             </button>
           </div>

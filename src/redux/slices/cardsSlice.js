@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   cardsArr: [],
   selectedCard: {},
+  info: null,
 };
+
 
 export const cardsSlice = createSlice({
   name: 'cards',
@@ -26,6 +28,9 @@ export const cardsSlice = createSlice({
     setSelectedCard(state, action) {
       state.selectedCard = action.payload;
     },
+    setInfo(state, action) {
+      state.info = action.payload;
+    },
     handleLikeCard(state, action) {
       state.cardsArr = state.cardsArr.map((obj) =>
         obj.id === action.payload.id ? action.payload : obj
@@ -34,6 +39,6 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { setCards, setSelectedCard, addCard, deleteCard, editCard, handleLikeCard } = cardsSlice.actions;
+export const { setCards, setSelectedCard, addCard, deleteCard, editCard, handleLikeCard, setInfo } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

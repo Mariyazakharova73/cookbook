@@ -2,8 +2,8 @@
   max-width: 358px;
   width: 100%;
   min-height: 50px;
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: var(--color-button);
+  color: var(--color-text);
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;

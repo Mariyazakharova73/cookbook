@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setSelectedCard } from '../redux/slices/cardsSlice';
+import handleLike from '../utils/utils.js';
 
 function CardItem({
   id,
@@ -12,13 +11,9 @@ function CardItem({
   ingredients,
   description,
   likes,
-  onCardDelete,
-  handlePopupEditOpen,
   handleLikeCard,
 }) {
-  
-  const dispatch = useDispatch();
-  const selectedCard = {
+  const card = {
     id,
     title,
     url,
@@ -27,28 +22,12 @@ function CardItem({
     ingredients,
     description,
     likes,
-    
   };
-  const isLiked = selectedCard.likes.some((i) => i.userId === '1111111');
+
+  const isLiked = card.likes.some((i) => i.userId === '1111111');
+
   const handleLikeClick = () => {
-    if (selectedCard.likes.some((i) => i.userId === '1111111')) {
-      const newArr = selectedCard.likes.filter((obj) => obj.userId !== '1111111');
-      const newCard = { ...selectedCard, likes: newArr };
-      handleLikeCard(newCard);
-    } else {
-      const newArr = [{ userId: '1111111' }, ...selectedCard.likes];
-      const newCard = { ...selectedCard, likes: newArr };
-      handleLikeCard(newCard);
-    }
-  };
-
-  const handleDeleteClick = () => {
-    onCardDelete(id);
-  };
-
-  const handleEditClick = () => {
-    dispatch(setSelectedCard(selectedCard));
-    handlePopupEditOpen();
+    handleLike(card, handleLikeCard);
   };
 
   return (
@@ -70,14 +49,6 @@ function CardItem({
               type="button"
             />
             <p className="button-like__number">{likes.length}</p>
-          </div>
-          <div className="card__button-container">
-            <button className="button" onClick={handleEditClick}>
-              Редактировать
-            </button>
-            <button className="button" onClick={handleDeleteClick}>
-              Удалить
-            </button>
           </div>
         </div>
       </li>

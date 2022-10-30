@@ -3,19 +3,18 @@ import './../index.css';
 import Header from './Header';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
-import Popup from './Popup';
-import Popup2 from './Popup2';
+import PopupAdd from './PopupAdd';
+import PopupEdit from './PopupEdit';
 import FullInfo from './FullInfo';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCards, addCard, deleteCard, editCard } from '../redux/slices/cardsSlice'
-
+import { useDispatch } from 'react-redux';
+import { addCard, deleteCard, editCard, setInfo } from '../redux/slices/cardsSlice';
+import Wrapper from './Wrapper';
 
 function App() {
   const [isPopupAddOpen, setIsPopupAddOpen] = React.useState(false);
   const [isPopupEditOpen, setIsPopupEditOpen] = React.useState(false);
-  const cards = useSelector((state) => state.cards.cardsArr);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   function closeAllPopups() {
     setIsPopupAddOpen(false);
@@ -34,7 +33,7 @@ function App() {
     try {
       const res = await axios.post('https://635add296f97ae73a6387aaa.mockapi.io/items', cardObj);
       //dispatch(setCards([res.data, ...cards]));
-      dispatch(addCard(res.data))
+      dispatch(addCard(res.data));
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +43,7 @@ function App() {
     try {
       const res = await axios.delete('https://635add296f97ae73a6387aaa.mockapi.io/items/' + id);
       //dispatch(setCards(cards.filter((obj) => obj.id !== res.data.id)));
-      dispatch(deleteCard(res.data.id))
+      dispatch(deleteCard(res.data.id));
     } catch (err) {
       console.log(err);
     }
@@ -52,8 +51,12 @@ function App() {
 
   async function handleEditCard(cardObj) {
     try {
-      const res = await axios.put('https://635add296f97ae73a6387aaa.mockapi.io/items/'+ cardObj.id, cardObj);
-      dispatch(editCard(res.data))
+      const res = await axios.put(
+        'https://635add296f97ae73a6387aaa.mockapi.io/items/' + cardObj.id,
+        cardObj
+      );
+      //dispatch(editCard(res.data))
+      dispatch(setInfo(cardObj));
       //dispatch(setCards(cards.filter((obj) => obj.id !== res.data.id)));
     } catch (err) {
       console.log(err);
@@ -62,25 +65,51 @@ function App() {
 
   async function handleLikeCard(cardObj) {
     try {
-      const res = await axios.put('https://635add296f97ae73a6387aaa.mockapi.io/items/'+ cardObj.id, cardObj);
-      dispatch(editCard(res.data))
+      const res = await axios.put(
+        'https://635add296f97ae73a6387aaa.mockapi.io/items/' + cardObj.id,
+        cardObj
+      );
+      dispatch(editCard(res.data));
+      dispatch(setInfo(cardObj));
     } catch (err) {
       console.log(err);
     }
   }
 
+  const closeByOverlay = (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closeAllPopups();
+    }
+  };
 
   return (
     <div className="page">
       <div className="page__wrapper">
         <Header handlePopupAddOpen={handlePopupAddOpen} />
         <Routes>
-          <Route path="/" element={<Home onCardDelete={handleDeleteCard} handlePopupEditOpen={handlePopupEditOpen} handleLikeCard={handleLikeCard}/>} />
-          <Route path="/:id" element={<FullInfo />}></Route>
+          <Route path="/" element={<Home handleLikeCard={handleLikeCard} />} />
+          <Route
+            path="/:id"
+            element={
+              <FullInfo
+                onCardDelete={handleDeleteCard}
+                handlePopupEditOpen={handlePopupEditOpen}
+                handleLikeCard={handleLikeCard}
+              />
+            }
+          ></Route>
           <Route path="*" element={<h2>Страница не найдена 😕</h2>}></Route>
         </Routes>
-        <Popup isOpen={isPopupAddOpen} onClose={closeAllPopups} onAddCard={handleAddCard} />
-        <Popup2 isOpen={isPopupEditOpen} onClose={closeAllPopups} handleEditCard={handleEditCard} />
+        <Wrapper isOpen={isPopupAddOpen} onClose={closeAllPopups} closeByOverlay={closeByOverlay}>
+          <PopupAdd onClose={closeAllPopups} onAddCard={handleAddCard} />
+        </Wrapper>
+        <Wrapper isOpen={isPopupEditOpen} onClose={closeAllPopups} closeByOverlay={closeByOverlay}>
+          <PopupEdit
+            isOpen={isPopupEditOpen}
+            onClose={closeAllPopups}
+            handleEditCard={handleEditCard}
+          />
+        </Wrapper>
       </div>
     </div>
   );

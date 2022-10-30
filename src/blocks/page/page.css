@@ -171,7 +171,7 @@ body {
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(364px, 1fr));
-  row-gap: 20px;
+  row-gap: 30px;
   column-gap: 15px;
   margin: auto;
   max-width: 1122px;
@@ -195,7 +195,7 @@ body {
   min-height: 200px;
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid var(--color-text);
+  box-shadow: -2px 2px 6px 2px rgba(245, 246, 247, 0.2);
 }
 
 .card__image {
@@ -219,7 +219,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-height: 200px;
 }
 
 .card__title {
@@ -235,7 +234,6 @@ body {
 .card__button-container {
   display: flex;
   gap: 20px;
-  margin-top: auto;
 }
 
 .info {

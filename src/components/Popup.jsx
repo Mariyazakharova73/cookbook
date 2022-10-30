@@ -1,69 +1,109 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { linkChecking } from '../utils/constants.js';
 
-function PopupEdit({ onClose, handleChange, handleSubmit, inputValues, titleText }) {
+function PopupEdit({ onClose, handleChange, inputValues, titleText, onSubmit }) {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({ mode: 'onBlur' });
+
   return (
     <div className="popup__content">
       <button className="popup__close" type="button" onClick={onClose} />
       <div className="popup__form-content">
         <h2 className="popup__form-heading">{titleText}</h2>
-        <form className="popup__form form" onSubmit={handleSubmit}>
+        <form className="popup__form form" onSubmit={handleSubmit(onSubmit)} noValidate>
           <input
+            {...register('title', {
+              required: 'Поле обязательно для заполения',
+              minLength: {
+                value: 5,
+                message: 'Минимум 5 символов',
+              },
+            })}
             name="title"
+            className="popup__form-input"
             onChange={handleChange}
             value={inputValues.title || ''}
-            className={`popup__form-input ${false ? 'popup__form-input_type_error' : ''}`}
             type="text"
             placeholder="Название блюда"
-            minLength="2"
-            maxLength="100"
-            required
           />
+          <span className="popup__form-err">{errors?.title?.message || ' '}</span>
           <input
+            {...register('url', {
+              required: 'Поле обязательно для заполения',
+              minLength: {
+                value: 5,
+                message: 'Минимум 5 символов',
+              },
+              pattern: {
+                value: linkChecking,
+                message: 'Введите ссылку',
+              },
+            })}
             name="url"
+            className="popup__form-input"
             onChange={handleChange}
             value={inputValues.url || ''}
-            className={`popup__form-input ${false ? 'popup__form-input_type_error' : ''}`}
             type="url"
             placeholder="Ссылка на фото"
-            minLength="2"
           />
+          <span className="popup__form-err">{errors?.url?.message || ' '}</span>
           <input
+            {...register('type', {
+              required: 'Поле обязательно для заполения',
+              minLength: {
+                value: 5,
+                message: 'Неверное значение',
+              },
+              maxLength: {
+                value: 6,
+                message: 'Неверное значение',
+              },
+            })}
             name="type"
+            className="popup__form-input"
             onChange={handleChange}
             value={inputValues.type || ''}
-            className="popup__form-input"
             type="text"
             placeholder="Сложность (сложно/легко)"
-            minLength="2"
-            required
           />
+          <span className="popup__form-err">{errors?.type?.message || ' '}</span>
           <textarea
+            {...register('ingredients', {
+              required: 'Поле обязательно для заполения',
+              minLength: {
+                value: 10,
+                message: 'Минимум 10 символов',
+              },
+            })}
             name="ingredients"
+            className="popup__form-textarea"
             onChange={handleChange}
             value={inputValues.ingredients || ''}
-            className="popup__form-textarea"
             type="text"
             placeholder="Список ингредиентов"
-            minLength="2"
-            required
           />
+          <span className="popup__form-err">{errors?.ingredients?.message || ' '} </span>
           <textarea
+          {...register('description', {
+            required: 'Поле обязательно для заполения',
+            minLength: {
+              value: 30,
+              message: 'Минимум 30 символов',
+            },
+          })}
             name="description"
+            className="popup__form-textarea"
             onChange={handleChange}
             value={inputValues.description || ''}
-            className="popup__form-textarea"
             type="text"
             placeholder="Порядок приготовления"
-            minLength="2"
-            required
           />
-          <button
-            disabled={false}
-            className={
-              true ? `popup__form-button` : `popup__form-button popup__form-button_inactive`
-            }
-            type="submit"
-          >
+          <span className="popup__form-err">{errors?.description?.message || ' '} </span>
+          <button disabled={!isValid} className="popup__form-button" type="submit">
             Сохранить
           </button>
         </form>

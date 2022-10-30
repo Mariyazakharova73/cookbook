@@ -6,6 +6,8 @@ import Home from './Home';
 import PopupAdd from './PopupAdd';
 import PopupEdit from './PopupEdit';
 import FullInfo from './FullInfo';
+import Login from './Login';
+import Register from './Register';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addCard, deleteCard, editCard, setInfo } from '../redux/slices/cardsSlice';
@@ -98,10 +100,15 @@ function App() {
               />
             }
           ></Route>
+          <Route
+            path="/sign-up"
+            element={<Register title="Регистрация" buttonText="Зарегистрироваться" />}
+          ></Route>
+          <Route path="/sign-in" element={<Login title="Вход" buttonText="Войти" />}></Route>
           <Route path="*" element={<h2>Страница не найдена 😕</h2>}></Route>
         </Routes>
         <Wrapper isOpen={isPopupAddOpen} onClose={closeAllPopups} closeByOverlay={closeByOverlay}>
-          <PopupAdd onClose={closeAllPopups} onAddCard={handleAddCard} />
+          <PopupAdd  onClose={closeAllPopups} onAddCard={handleAddCard} />
         </Wrapper>
         <Wrapper isOpen={isPopupEditOpen} onClose={closeAllPopups} closeByOverlay={closeByOverlay}>
           <PopupEdit

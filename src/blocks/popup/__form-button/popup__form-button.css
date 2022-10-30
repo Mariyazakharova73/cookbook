@@ -26,3 +26,8 @@
 .popup__form-button:hover {
   opacity: .8;
 }
+
+.popup__form-button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}

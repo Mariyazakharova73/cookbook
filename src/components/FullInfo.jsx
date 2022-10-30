@@ -49,9 +49,7 @@ function FullInfo({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
       <img className="info__image" src={info.url} alt={`${info.title}.`} />
       <div className="info__container">
         <h2 className="info__title">{info.title}</h2>
-        <div className="card__info">
-          <p>Сложность приготовления: {info.type}</p>
-        </div>
+        <p>Сложность приготовления: {info.type}</p>
         <p>Ингредиенты: {info.ingredients}</p>
         <h3>Приготовление</h3>
         <p>{info.description}</p>

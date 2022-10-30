@@ -8,12 +8,15 @@ function Header({ handlePopupAddOpen }) {
         <h2>Cookbook</h2>
       </Link>
       <div className="header__button-container">
-        {/* <button className="header__button">Редактировать рецепт</button> */}
-        <button className="button" onClick={handlePopupAddOpen}>
+        <Link className="button" onClick={handlePopupAddOpen}>
           Добавить рецепт
-        </button>
-        <button className="button">Войти</button>
-        <button className="button">Создать аккаунт</button>
+        </Link>
+        <Link className="button" to="/sign-in">
+          Войти
+        </Link>
+        <Link className="button" to="sign-up">
+          Создать аккаунт
+        </Link>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from './Popup';
 
-function PopupAdd({ onClose, onAddCard }) {
+function PopupAdd({ onClose, onAddCard, isOpen }) {
   const [inputValues, setInputValues] = React.useState({});
 
   const handleChange = (evt) => {
@@ -9,8 +9,8 @@ function PopupAdd({ onClose, onAddCard }) {
     setInputValues({ ...inputValues, [name]: value });
   };
 
-  function handleSubmit(evt) {
-    evt.preventDefault();
+
+  function onSubmit() {
     // Передаём значения управляемых компонентов во внешний обработчик
     onAddCard({ ...inputValues, likes: [], mainIgredients: '' });
     onClose();
@@ -21,7 +21,7 @@ function PopupAdd({ onClose, onAddCard }) {
     <Popup
       onClose={onClose}
       titleText="Добавить рецепт"
-      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
       handleChange={handleChange}
       inputValues={inputValues}
     />

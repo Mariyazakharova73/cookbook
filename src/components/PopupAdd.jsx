@@ -1,5 +1,5 @@
 import React from 'react';
-import Popup from './Popup';
+import Popup from './Popup/Popup';
 
 function PopupAdd({ onClose, onAddCard, isOpen }) {
   const [inputValues, setInputValues] = React.useState({});

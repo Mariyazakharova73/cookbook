@@ -1,0 +1,85 @@
+.card__item {
+  border-radius: 10px;
+  max-width: 364px;
+  min-height: 200px;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: -2px 2px 6px 2px rgba(245, 246, 247, 0.2);
+}
+
+.card__image {
+  display: block;
+  width: 364px;
+  height: 240px;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity .5s linear;
+  transition: all 0.5s ease-in-out;
+}
+
+.card__image:hover {
+  opacity: .6;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.card__wrapper {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card__title {
+  font-size: 20px;
+}
+
+.card__info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card__button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.button-like {
+  background: transparent;
+  background-image: url(../../images/like.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 0;
+  width: 22px;
+  height: 19px;
+  transition: opacity .5s linear;
+}
+
+.button-like:hover {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.button-like__container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.button-like__number {
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 50px;
+}
+
+.button-like_active {
+  background-image: url(../../images/like-active.svg);
+}

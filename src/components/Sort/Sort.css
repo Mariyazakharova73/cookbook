@@ -1,0 +1,48 @@
+.sort {
+  display: flex;
+  position: relative;
+  padding: 20px 0;
+}
+
+.sort__text {
+  cursor: pointer;
+  color: var(--color-button);
+  border-bottom: 1px dashed var(--color-button);
+}
+
+.sort__popup {
+  position: absolute;
+  left: 0;
+  margin-top: 25px;
+  background: #ffffff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+  border-radius: 10px;
+  visibility: hidden;
+  transition: visibility .5s, opacity .5s linear;
+  opacity: 0;
+  padding: 5px 0;
+  width: 160px;
+}
+
+.sort__popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sort__list {}
+
+.sort__item {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #0a1137;
+}
+
+.sort__item_active {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--color-button);
+}
+
+.sort__item:hover {
+  background: rgba(23, 13, 158, 0.05);
+}

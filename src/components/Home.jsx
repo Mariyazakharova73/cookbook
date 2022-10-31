@@ -1,7 +1,7 @@
 import React from 'react';
-import Search from './Search';
-import CardList from './CardList';
-import Sort from './Sort';
+import Search from './Search/Search';
+import CardList from './CardList/CardList';
+import Sort from './Sort/Sort';
 import axios from 'axios';
 import { useDispatch } from 'react-redux'
 import { setCards } from '../redux/slices/cardsSlice'

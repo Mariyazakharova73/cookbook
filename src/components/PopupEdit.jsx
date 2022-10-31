@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Popup from './Popup';
+import Popup from './Popup/Popup';
 
 function PopupEdit({ isOpen, onClose, handleEditCard }) {
   const [inputValues, setInputValues] = React.useState({});
@@ -15,7 +15,7 @@ function PopupEdit({ isOpen, onClose, handleEditCard }) {
     setInputValues({ ...inputValues, [name]: value });
   };
 
-  function handleSubmit(evt) {
+  function onSubmit(evt) {
     evt.preventDefault();
     handleEditCard(inputValues);
     onClose();
@@ -27,7 +27,7 @@ function PopupEdit({ isOpen, onClose, handleEditCard }) {
       isOpen={isOpen}
       onClose={onClose}
       titleText="Редактировать рецепт"
-      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
       handleChange={handleChange}
       inputValues={inputValues}
     />

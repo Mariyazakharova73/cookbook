@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import handleLike from '../../utils/utils';
 import '../CardItem/CardItem.css';
+import { setSelectedCard } from '../../redux/slices/cardsSlice';
+import { useDispatch } from 'react-redux';
 
 function CardItem({
   id,
@@ -24,12 +26,18 @@ function CardItem({
     description,
     likes,
   };
-
+  
+  const dispatch = useDispatch();
   const isLiked = card.likes.some((i) => i.userId === '1111111');
 
   const handleLikeClick = () => {
     handleLike(card, handleLikeCard);
   };
+
+  const handleImgClick = () => {
+    dispatch(setSelectedCard(card));
+  };
+
 
   return (
     <>

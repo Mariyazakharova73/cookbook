@@ -8,9 +8,15 @@ export function useFormAndValidation() {
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setValues({ ...values, [name]: value });
+  };
+
+  const handleBlur= (evt) => {
+    const { name} = evt.target;
     setErrors({ ...errors, [name]: evt.target.validationMessage });
     setIsValid(evt.target.closest('.form').checkValidity());
   };
+
+
 
   const resetForm = useCallback(
     //значения по умолчанию
@@ -23,5 +29,5 @@ export function useFormAndValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid };
+  return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid, handleBlur };
 }

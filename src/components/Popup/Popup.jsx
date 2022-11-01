@@ -1,109 +1,78 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { linkChecking } from '../../utils/constants.js';
+//import { useForm } from 'react-hook-form';
+//import { linkChecking } from '../../utils/constants.js';
 import './Popup.css';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation.js';
 
-function Popup({ onClose, handleChange, inputValues, titleText, onSubmit }) {
-  const {
-    register,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm({ mode: 'onBlur' });
+function Popup({ onClose, titleText, handleSubmit }) {
+  const { values, handleChange, errors, isValid, handleBlur } = useFormAndValidation({});
 
   return (
     <div className="popup__content">
       <button className="popup__close" type="button" onClick={onClose} />
       <div className="popup__form-content">
         <h2 className="popup__form-heading">{titleText}</h2>
-        <form className="popup__form form" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className="form popup__form" onSubmit={handleSubmit} noValidate>
           <input
-            {...register('title', {
-              required: 'Поле обязательно для заполения',
-              minLength: {
-                value: 5,
-                message: 'Минимум 5 символов',
-              },
-            })}
             name="title"
             className="popup__form-input"
             onChange={handleChange}
-            value={inputValues.title || ''}
+            value={values.title || ''}
             type="text"
             placeholder="Название блюда"
+            onBlur={handleBlur}
+            minLength="2"
+            maxLength="30"
+            required
           />
-          <span className="popup__form-err">{errors?.title?.message}</span>
+          <span className="popup__form-err">{errors.title}</span>
           <input
-            {...register('url', {
-              required: 'Поле обязательно для заполения',
-              minLength: {
-                value: 5,
-                message: 'Минимум 5 символов',
-              },
-              pattern: {
-                value: linkChecking,
-                message: 'Введите ссылку',
-              },
-            })}
             name="url"
             className="popup__form-input"
             onChange={handleChange}
-            value={inputValues.url || ''}
+            value={values.url || ''}
             type="url"
             placeholder="Ссылка на фото"
+            onBlur={handleBlur}
+            required
           />
-          <span className="popup__form-err">{errors?.url?.message}</span>
+          <span className="popup__form-err">{errors.url}</span>
           <input
-            {...register('type', {
-              required: 'Поле обязательно для заполения',
-              minLength: {
-                value: 5,
-                message: 'Неверное значение',
-              },
-              maxLength: {
-                value: 6,
-                message: 'Неверное значение',
-              },
-            })}
             name="type"
             className="popup__form-input"
             onChange={handleChange}
-            value={inputValues.type || ''}
+            value={values.type || ''}
             type="text"
             placeholder="Сложность (сложно/легко)"
+            onBlur={handleBlur}
+            minLength="5"
+            maxLength="6"
+            required
           />
-          <span className="popup__form-err">{errors?.type?.message}</span>
+          <span className="popup__form-err">{errors.type}</span>
           <textarea
-            {...register('ingredients', {
-              required: 'Поле обязательно для заполения',
-              minLength: {
-                value: 10,
-                message: 'Минимум 10 символов',
-              },
-            })}
             name="ingredients"
             className="popup__form-textarea"
             onChange={handleChange}
-            value={inputValues.ingredients}
+            value={values.ingredients}
             type="text"
             placeholder="Список ингредиентов"
+            onBlur={handleBlur}
+            minLength="5"
+            required
           />
-          <span className="popup__form-err">{errors?.ingredients?.message} </span>
+          <span className="popup__form-err">{errors.ingredients}</span>
           <textarea
-            {...register('description', {
-              required: 'Поле обязательно для заполения',
-              minLength: {
-                value: 30,
-                message: 'Минимум 30 символов',
-              },
-            })}
             name="description"
             className="popup__form-textarea"
             onChange={handleChange}
-            value={inputValues.description || ''}
-            type="text"
+            value={values.description || ''}
             placeholder="Порядок приготовления"
+            onBlur={handleBlur}
+            required
+            minLength="10"
           />
-          <span className="popup__form-err">{errors?.description?.message} </span>
+          <span className="popup__form-err">{errors.description}</span>
           <button disabled={!isValid} className="popup__form-button" type="submit">
             Сохранить
           </button>
@@ -114,3 +83,4 @@ function Popup({ onClose, handleChange, inputValues, titleText, onSubmit }) {
 }
 
 export default Popup;
+

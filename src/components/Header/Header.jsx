@@ -15,7 +15,7 @@ function Header({ handlePopupAddOpen }) {
         <Link className="button" to="/sign-in">
           Войти
         </Link>
-        <Link className="button" to="sign-up">
+        <Link className="button">
           Создать аккаунт
         </Link>
       </div>

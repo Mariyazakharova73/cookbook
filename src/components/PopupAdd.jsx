@@ -1,29 +1,22 @@
 import React from 'react';
 import Popup from './Popup/Popup';
+import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
 function PopupAdd({ onClose, onAddCard, isOpen }) {
-  const [inputValues, setInputValues] = React.useState({});
+  const { values, setValues } = useFormAndValidation({});
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setInputValues({ ...inputValues, [name]: value });
-  };
-
-
-  function onSubmit() {
-    // Передаём значения управляемых компонентов во внешний обработчик
-    onAddCard({ ...inputValues, likes: [], mainIgredients: '' });
+  function handleSubmit() {
+    onAddCard({ ...values, likes: [], mainIgredients: '' });
     onClose();
-    setInputValues('');
+    setValues('');
   }
 
   return (
     <Popup
+      isOpen={isOpen}
       onClose={onClose}
       titleText="Добавить рецепт"
-      onSubmit={onSubmit}
-      handleChange={handleChange}
-      inputValues={inputValues}
+      handleSubmit={handleSubmit}
     />
   );
 }

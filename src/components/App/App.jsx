@@ -7,7 +7,7 @@ import Home from '../Home';
 import PopupAdd from '../PopupAdd';
 import PopupEdit from '../PopupEdit';
 import FullInfo from '../FullInfo/FullInfo';
-import Login from '../Login';
+import Login from '../Login/Login';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addCard, deleteCard, editCard, setInfo } from '../../redux/slices/cardsSlice';

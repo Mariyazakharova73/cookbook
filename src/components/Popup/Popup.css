@@ -167,6 +167,10 @@
   outline: none;
 }
 
+.popup__form-input:focus {
+  outline: 3px solid var(--color-button);
+}
+
 .popup__form-input::placeholder {
   font-weight: 400;
   font-size: 14px;
@@ -182,8 +186,12 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.popup__form-input:focus {
+  outline: 3px solid var(--color-button);
+}
+
 .popup__form-err {
-  height: 30px;
+  height: 40px;
   font-size: 15px;
   transition: all linear .3s;
   color: red

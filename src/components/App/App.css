@@ -10,7 +10,7 @@ body {
   --color-button: #626dab;
   --color-background: #1c1d1e;
   background-color: var(--color-background);
-  color: var(--color-text)
+  color: var(--color-text);
 }
 
 .page {

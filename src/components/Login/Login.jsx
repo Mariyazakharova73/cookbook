@@ -1,16 +1,31 @@
 import React from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js';
 import '../Login/Login.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoggedIn } from '../../redux/slices/loginSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const { values, handleChange, errors, isValid, handleBlur, setValues } = useFormAndValidation({});
+  const history = useNavigate();
+  const dispatch = useDispatch();
 
   function handleSubmit(evt) {
     evt.preventDefault();
     const { email, password } = values;
-    //если нет email или password, то не делаем запрос (ранний выход)
-    if (!email || !password) return;
-    //onLogin(email, password);
+    if (!email || !password) {
+      alert('Неверный логин или пароль!');
+      return;
+    }
+
+    if (email == 'test12345@yandex.ru' && password == 12345) {
+      dispatch(setIsLoggedIn(true));
+      history('/');
+      console.log(isLoggedIn);
+      return;
+    }
+    alert('Неверный логин или пароль!');
   }
 
   return (
@@ -27,9 +42,7 @@ function Login() {
             value={values.email || ''}
             onChange={handleChange}
           />
-          <span className='login__form-err'>
-            {errors.email || " "}
-          </span>
+          <span className="login__form-err">{errors.email || ' '}</span>
           <input
             onBlur={handleBlur}
             className="login__form-input"
@@ -41,11 +54,7 @@ function Login() {
             value={values.password || ''}
             onChange={handleChange}
           />
-          <span
-            className='login__form-err'
-          >
-            {errors.password || " "} 
-          </span>
+          <span className="login__form-err">{errors.password || ' '}</span>
         </div>
         <button className="login__form-button" type="submit" disabled={!isValid}>
           Войти

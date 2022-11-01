@@ -4,13 +4,14 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCard, setInfo } from '../../redux/slices/cardsSlice';
 import handleLike from '../../utils/utils.js';
-import '../FullInfo/FullInfo.css'
+import '../FullInfo/FullInfo.css';
 
 function FullInfo({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const info = useSelector((state) => state.cards.info);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   React.useEffect(() => {
     async function fetchInfo() {
@@ -55,21 +56,33 @@ function FullInfo({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
         <h3>Приготовление</h3>
         <p>{info.description}</p>
         <div className="button-like__container">
-          <button
-            onClick={handleLikeClick}
-            className={`button-like ${isLiked ? 'button-like_active' : ''}`}
-            type="button"
-          />
+          {isLoggedIn ? (
+            <button
+              onClick={handleLikeClick}
+              className={`button-like ${isLiked ? 'button-like_active' : ''}`}
+              type="button"
+            />
+          ) : (
+            <button
+              style={{ cursor: 'not-allowed' }}
+              className={`button-like ${isLiked ? 'button-like_active' : ''}`}
+              type="button"
+            />
+          )}
           <p className="button-like__number">{info.likes.length}</p>
         </div>
-        <div className="card__button-container">
-          <button className="button" onClick={handleEditClick}>
-            Редактировать
-          </button>
-          <button className="button" onClick={handleDeleteClick}>
-            Удалить
-          </button>
-        </div>
+        {isLoggedIn ? (
+          <div className="card__button-container">
+            <button className="button" onClick={handleEditClick}>
+              Редактировать
+            </button>
+            <button className="button" onClick={handleDeleteClick}>
+              Удалить
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

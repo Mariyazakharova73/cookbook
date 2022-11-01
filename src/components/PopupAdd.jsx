@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from './Popup/Popup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
-function PopupAdd({ onClose, onAddCard, isOpen }) {
+function PopupAdd({ onClose, onAddCard }) {
   const { values, setValues, errors, isValid, handleBlur, handleChange } = useFormAndValidation({});
 
   function handleSubmit(evt) {

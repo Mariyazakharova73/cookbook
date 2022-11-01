@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../index.js';
-import '../App/App.css'
+import '../App/App.css';
 import Header from '../Header/Header';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../Home';
@@ -12,7 +12,6 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addCard, deleteCard, editCard, setInfo } from '../../redux/slices/cardsSlice';
 import Wrapper from '../Wrapper';
-
 
 function App() {
   const [isPopupAddOpen, setIsPopupAddOpen] = React.useState(false);
@@ -105,7 +104,7 @@ function App() {
           <Route path="*" element={<h2>Страница не найдена 😕</h2>}></Route>
         </Routes>
         <Wrapper isOpen={isPopupAddOpen} onClose={closeAllPopups} closeByOverlay={closeByOverlay}>
-          <PopupAdd  onClose={closeAllPopups} onAddCard={handleAddCard} />
+          <PopupAdd onClose={closeAllPopups} onAddCard={handleAddCard} />
         </Wrapper>
         <Wrapper isOpen={isPopupEditOpen} onClose={closeAllPopups} closeByOverlay={closeByOverlay}>
           <PopupEdit

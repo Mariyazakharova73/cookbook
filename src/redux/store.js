@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cards from './slices/cardsSlice';
+import login from './slices/loginSlice';
 
-//configureStore создает хранилище
 export const store = configureStore({
-  reducer: { cards },
+  reducer: { cards, login },
 });

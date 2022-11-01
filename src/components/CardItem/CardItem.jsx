@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import handleLike from '../../utils/utils';
 import '../CardItem/CardItem.css';
-import { setSelectedCard } from '../../redux/slices/cardsSlice';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function CardItem({
   id,
@@ -26,18 +25,13 @@ function CardItem({
     description,
     likes,
   };
-  
-  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const isLiked = card.likes.some((i) => i.userId === '1111111');
 
   const handleLikeClick = () => {
     handleLike(card, handleLikeCard);
   };
-
-  const handleImgClick = () => {
-    dispatch(setSelectedCard(card));
-  };
-
 
   return (
     <>
@@ -52,11 +46,19 @@ function CardItem({
           </div>
           <p className="card__ingredients">{`Базовые ингредиенты: ${mainIgredients}`}</p>
           <div className="button-like__container">
-            <button
-              onClick={handleLikeClick}
-              className={`button-like ${isLiked ? 'button-like_active' : ''}`}
-              type="button"
-            />
+            {isLoggedIn ? (
+              <button
+                onClick={handleLikeClick}
+                className={`button-like ${isLiked ? 'button-like_active' : ''}`}
+                type="button"
+              />
+            ) : (
+              <button
+                style={{ cursor: 'not-allowed' }}
+                className={`button-like ${isLiked ? 'button-like_active' : ''}`}
+                type="button"
+              />
+            )}
             <p className="button-like__number">{likes.length}</p>
           </div>
         </div>

@@ -3,9 +3,10 @@ import Popup from './Popup/Popup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
 function PopupAdd({ onClose, onAddCard, isOpen }) {
-  const { values, setValues } = useFormAndValidation({});
+  const { values, setValues, errors, isValid, handleBlur, handleChange } = useFormAndValidation({});
 
-  function handleSubmit() {
+  function handleSubmit(evt) {
+    evt.preventDefault();
     onAddCard({ ...values, likes: [], mainIgredients: '' });
     onClose();
     setValues('');
@@ -13,10 +14,14 @@ function PopupAdd({ onClose, onAddCard, isOpen }) {
 
   return (
     <Popup
-      isOpen={isOpen}
       onClose={onClose}
-      titleText="Добавить рецепт"
+      handleChange={handleChange}
+      values={values}
+      isValid={isValid}
+      errors={errors}
+      handleBlur={handleBlur}
       handleSubmit={handleSubmit}
+      titleText="Добавить рецепт"
     />
   );
 }

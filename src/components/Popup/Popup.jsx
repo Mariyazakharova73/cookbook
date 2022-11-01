@@ -1,12 +1,16 @@
 import React from 'react';
-//import { useForm } from 'react-hook-form';
-//import { linkChecking } from '../../utils/constants.js';
 import './Popup.css';
-import { useFormAndValidation } from '../../hooks/useFormAndValidation.js';
 
-function Popup({ onClose, titleText, handleSubmit }) {
-  const { values, handleChange, errors, isValid, handleBlur } = useFormAndValidation({});
-
+function Popup({
+  onClose,
+  titleText,
+  handleSubmit,
+  handleChange,
+  values,
+  errors,
+  handleBlur,
+  isValid,
+}) {
   return (
     <div className="popup__content">
       <button className="popup__close" type="button" onClick={onClose} />
@@ -83,4 +87,3 @@ function Popup({ onClose, titleText, handleSubmit }) {
 }
 
 export default Popup;
-

@@ -4,25 +4,31 @@ import Popup from './Popup/Popup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 
 function PopupEdit({ isOpen, onClose, handleEditCard }) {
-  const { values, setValues} = useFormAndValidation({});
+  const { values, setValues, errors, isValid, handleBlur, handleChange, resetForm } =
+    useFormAndValidation({});
   const selectedCard = useSelector((state) => state.cards.selectedCard);
-  console.log(selectedCard)
 
   React.useEffect(() => {
+    resetForm();
     setValues(selectedCard);
   }, [isOpen]);
 
-  function handleSubmit() {
+  function handleSubmit(evt) {
+    evt.preventDefault();
     handleEditCard(values);
     onClose();
   }
 
   return (
     <Popup
-      isOpen={isOpen}
       onClose={onClose}
-      titleText="Редактировать рецепт"
+      handleChange={handleChange}
+      values={values}
+      isValid={isValid}
+      errors={errors}
+      handleBlur={handleBlur}
       handleSubmit={handleSubmit}
+      titleText="Редактировать рецепт"
     />
   );
 }

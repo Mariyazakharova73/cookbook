@@ -18,4 +18,4 @@ npm run deploy - обновляет проект на gh-pages<br/>
 
 **Cсылка на страницу проекта**
 
-* [Ссылка: "Cookbook"](https://mariyazakharova73.github.io/cookbook/)
+* [Ссылка: "Cookbook"](https://mariyazakharova73.github.io/cookbook)

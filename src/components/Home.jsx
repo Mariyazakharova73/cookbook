@@ -13,7 +13,6 @@ import {
 } from '../redux/slices/filterSlise';
 
 function Home({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
-
   const sortType = useSelector(selectSortType);
   const searchValue = useSelector(selectSearchValue);
   const dispatch = useDispatch();

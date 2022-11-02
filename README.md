@@ -9,8 +9,7 @@
 
 **Технологии и инструменты**
 
-`React, Redux Toolkit, React Router v6, Axios `
- <!-- React Content Loader (скелетон) -->
+`React, Redux Toolkit, React Router v6, Axios, React Content Loader `
 
 **Начало работы**
 

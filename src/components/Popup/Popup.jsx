@@ -2,6 +2,7 @@ import React from 'react';
 import './Popup.css';
 import { useDispatch } from 'react-redux';
 import { setIsPopupAddOpen, setIsPopupEditOpen } from '../../redux/slices/popupSlice';
+import food from '../../images/food.jpg';
 
 function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBlur, isValid }) {
   const dispatch = useDispatch();
@@ -30,6 +31,18 @@ function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBl
           />
           <span className="popup__form-err">{errors.title}</span>
           <input
+            name="mainIgredients"
+            className="popup__form-input"
+            onChange={handleChange}
+            value={values.mainIgredients || ''}
+            type="text"
+            placeholder="Базовые ингредиенты"
+            onBlur={handleBlur}
+            minLength="2"
+            maxLength="100"
+          />
+          <span className="popup__form-err">{errors.mainIgredients}</span>
+          <input
             name="url"
             className="popup__form-input"
             onChange={handleChange}
@@ -37,7 +50,6 @@ function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBl
             type="url"
             placeholder="Ссылка на фото"
             onBlur={handleBlur}
-            required
           />
           <span className="popup__form-err">{errors.url}</span>
           <select
@@ -45,6 +57,7 @@ function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBl
             className="popup__form-select"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           >
             <option className="popup__form-option" value="легко">
               легко
@@ -58,7 +71,7 @@ function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBl
             name="ingredients"
             className="popup__form-textarea"
             onChange={handleChange}
-            value={values.ingredients}
+            value={values.ingredients || ''}
             type="text"
             placeholder="Список ингредиентов"
             onBlur={handleBlur}

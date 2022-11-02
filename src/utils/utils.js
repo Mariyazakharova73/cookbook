@@ -1,10 +1,10 @@
 const handleLike = (obj, x) => {
-  if (obj.likes.some((i) => i.userId === '1111111')) {
-    const newArr = obj.likes.filter((obj) => obj.userId !== '1111111');
+  if (obj.likes.some((i) => i.email === 'test12345@yandex.ru')) {
+    const newArr = obj.likes.filter((obj) => obj.email !== 'test12345@yandex.ru');
     const newCard = { ...obj, likes: newArr };
     x(newCard);
   } else {
-    const newArr = [{ userId: '1111111' }, ...obj.likes];
+    const newArr = [{ email: 'test12345@yandex.ru' }, ...obj.likes];
     const newCard = { ...obj, likes: newArr };
     x(newCard);
   }

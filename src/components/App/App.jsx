@@ -15,21 +15,9 @@ import Wrapper from '../Wrapper';
 import { selectPopupAdd, selectPopupEdit } from '../../redux/slices/popupSlice';
 
 function App() {
-  // const [isPopupAddOpen, setIsPopupAddOpen] = React.useState(false);
-  // const [isPopupEditOpen, setIsPopupEditOpen] = React.useState(false);
-
   const isPopupAddOpen = useSelector(selectPopupAdd);
   const isPopupEditOpen = useSelector(selectPopupEdit);
-
   const dispatch = useDispatch();
-
-  // function handlePopupAddOpen() {
-  //   setIsPopupAddOpen(true);
-  // }
-
-  // function handlePopupEditOpen(data) {
-  //   setIsPopupEditOpen(true);
-  // }
 
   async function handleAddCard(cardObj) {
     try {

@@ -5,8 +5,6 @@ const initialState = {
   isPopupEditOpen: false,
 };
 
-console.log(initialState.isPopupAddOpen)
-
 export const popupSlice = createSlice({
   name: 'popup',
   initialState,

@@ -9,12 +9,10 @@ function Search() {
 
   const onChangeInput = (evt) => {
     dispatch(setSearchValue(evt.target.value));
-    //setSearchValue(evt.target.value);
   };
 
   const onClickClear = () => {
     dispatch(setSearchValue(''));
-    //setSearchValue('');
   };
 
   return (

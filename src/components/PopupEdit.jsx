@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Popup from './Popup/Popup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
 import { selectCard } from '../redux/slices/cardsSlice';
+import { setIsPopupEditOpen } from '../redux/slices/popupSlice';
 
-function PopupEdit({ isOpen, onClose, handleEditCard }) {
+function PopupEdit({ isOpen, handleEditCard }) {
   const { values, setValues, errors, isValid, handleBlur, handleChange, resetForm } =
     useFormAndValidation({});
+  const dispatch = useDispatch();
   const selectedCard = useSelector(selectCard);
 
   React.useEffect(() => {
@@ -17,12 +19,11 @@ function PopupEdit({ isOpen, onClose, handleEditCard }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleEditCard(values);
-    onClose();
+    dispatch(setIsPopupEditOpen(false));
   }
 
   return (
     <Popup
-      onClose={onClose}
       handleChange={handleChange}
       values={values}
       isValid={isValid}

@@ -32,7 +32,7 @@ function FullInfo({ onCardDelete, handleLikeCard }) {
     return <>Загрузка...</>;
   }
 
-  const isLiked = info.likes.some((i) => i.userId === '1111111');
+  const isLiked = info.likes.some((i) => i.email === 'test12345@yandex.ru');
 
   const handleLikeClick = () => {
     handleLike(info, handleLikeCard);

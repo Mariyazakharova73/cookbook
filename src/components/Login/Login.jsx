@@ -1,12 +1,12 @@
 import React from 'react';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation.js';
 import '../Login/Login.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setIsLoggedIn } from '../../redux/slices/loginSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const { values, handleChange, errors, isValid, handleBlur} = useFormAndValidation({});
+  const { values, handleChange, errors, isValid, handleBlur } = useFormAndValidation({});
   const history = useNavigate();
   const dispatch = useDispatch();
 

@@ -1,16 +1,15 @@
 import React from 'react';
 import './Popup.css';
+import { useDispatch } from 'react-redux';
+import { setIsPopupAddOpen, setIsPopupEditOpen } from '../../redux/slices/popupSlice';
 
-function Popup({
-  onClose,
-  titleText,
-  handleSubmit,
-  handleChange,
-  values,
-  errors,
-  handleBlur,
-  isValid,
-}) {
+function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBlur, isValid }) {
+  const dispatch = useDispatch();
+  const onClose = () => {
+    dispatch(setIsPopupAddOpen(false));
+    dispatch(setIsPopupEditOpen(false));
+  };
+
   return (
     <div className="popup__content">
       <button className="popup__close" type="button" onClick={onClose} />
@@ -41,19 +40,20 @@ function Popup({
             required
           />
           <span className="popup__form-err">{errors.url}</span>
-          <input
+          <select
             name="type"
-            className="popup__form-input"
+            className="popup__form-select"
             onChange={handleChange}
-            value={values.type || ''}
-            type="text"
-            placeholder="Сложность (сложно/легко)"
             onBlur={handleBlur}
-            minLength="5"
-            maxLength="6"
-            required
-          />
-          <span className="popup__form-err">{errors.type}</span>
+          >
+            <option className="popup__form-option" value="легко">
+              легко
+            </option>
+            <option className="popup__form-option" value="сложно">
+              сложно
+            </option>
+          </select>
+          <span className="popup__form-err"></span>
           <textarea
             name="ingredients"
             className="popup__form-textarea"

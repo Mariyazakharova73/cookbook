@@ -1,9 +1,12 @@
 import React from 'react';
 import '../Sort/Sort.css';
+import { useSelector } from 'react-redux';
+import { selectSortType } from '../../redux/slices/filterSlise';
 
-function Sort({ sortType, onChangeSort }) {
+function Sort({ onChangeSort }) {
   const [isVisible, setIsVisible] = React.useState(false);
   const sortRef = React.useRef();
+  const sortType = useSelector(selectSortType);
 
   const list = [
     { name: 'алфавиту (а-я)', sortProperty: '-title' },

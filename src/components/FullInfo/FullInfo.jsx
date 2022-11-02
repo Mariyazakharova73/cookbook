@@ -2,16 +2,18 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedCard, setInfo } from '../../redux/slices/cardsSlice';
+import { setSelectedCard, setInfo, selectInfo } from '../../redux/slices/cardsSlice';
 import handleLike from '../../utils/utils.js';
 import '../FullInfo/FullInfo.css';
+import { selectIsLoggedIn } from '../../redux/slices/loginSlice';
+import { setIsPopupEditOpen } from '../../redux/slices/popupSlice';
 
-function FullInfo({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
+function FullInfo({ onCardDelete, handleLikeCard }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const info = useSelector((state) => state.cards.info);
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const info = useSelector(selectInfo);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   React.useEffect(() => {
     async function fetchInfo() {
@@ -42,7 +44,7 @@ function FullInfo({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
   };
 
   const handleEditClick = () => {
-    handlePopupEditOpen();
+    dispatch(setIsPopupEditOpen(true));
     dispatch(setSelectedCard(info));
   };
 
@@ -51,10 +53,10 @@ function FullInfo({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
       <img className="info__image" src={info.url} alt={`${info.title}.`} />
       <div className="info__container">
         <h2 className="info__title">{info.title}</h2>
-        <p>Сложность приготовления: {info.type}</p>
-        <p>Ингредиенты: {info.ingredients}</p>
+        <p className="info__text">Сложность приготовления: {info.type}</p>
+        <p className="info__text">Ингредиенты: {info.ingredients}</p>
         <h3>Приготовление</h3>
-        <p>{info.description}</p>
+        <p className="info__text">{info.description}</p>
         <div className="button-like__container">
           {isLoggedIn ? (
             <button

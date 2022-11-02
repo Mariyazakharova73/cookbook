@@ -9,7 +9,7 @@
 }
 
 .search__input {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--color-text);
   padding: 12px 20px;
   width: 400px;
   border-radius: 16px;
@@ -17,11 +17,18 @@
   padding-left: 42px;
   box-sizing: border-box;
   outline: none;
+  background-color: transparent;
+  color: var(--color-text);
 }
 
 .search__input:focus {
-  border: 1px solid var(--color-button);
+  outline: 3px solid var(--color-button);
 }
+
+.search__input::placeholder {
+  color: grey;
+}
+
 
 @media (max-width: 450px) {
   .search__input {

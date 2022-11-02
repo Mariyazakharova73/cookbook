@@ -6,8 +6,7 @@ import { setIsLoggedIn } from '../../redux/slices/loginSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const { values, handleChange, errors, isValid, handleBlur, setValues } = useFormAndValidation({});
+  const { values, handleChange, errors, isValid, handleBlur} = useFormAndValidation({});
   const history = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,9 +19,9 @@ function Login() {
     }
 
     if (email == 'test12345@yandex.ru' && password == 12345) {
+      localStorage.setItem('isLoggedIn', true);
       dispatch(setIsLoggedIn(true));
       history('/');
-      console.log(isLoggedIn);
       return;
     }
     alert('Неверный логин или пароль!');

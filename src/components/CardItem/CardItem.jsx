@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import handleLike from '../../utils/utils';
 import '../CardItem/CardItem.css';
 import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/slices/loginSlice';
 
 function CardItem({
   id,
@@ -26,7 +27,7 @@ function CardItem({
     likes,
   };
 
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const isLiked = card.likes.some((i) => i.userId === '1111111');
 
   const handleLikeClick = () => {

@@ -1,10 +1,13 @@
 import React from 'react';
 import CardItem from '../CardItem/CardItem';
 import { useSelector } from 'react-redux';
-import '../CardList/CardList.css'
+import '../CardList/CardList.css';
+import { selectLoading  } from '../../redux/slices/filterSlise';
+import { selectCardsArr } from '../../redux/slices/cardsSlice';
 
-function CardList({ loading, onCardDelete, handlePopupEditOpen, handleLikeCard }) {
-  const cards = useSelector((state) => state.cards.cardsArr);
+function CardList({ onCardDelete, handlePopupEditOpen, handleLikeCard }) {
+  const cards = useSelector(selectCardsArr);
+  const loading = useSelector(selectLoading);
 
   return (
     <div>

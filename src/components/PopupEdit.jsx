@@ -2,11 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Popup from './Popup/Popup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation.js';
+import { selectCard } from '../redux/slices/cardsSlice';
 
 function PopupEdit({ isOpen, onClose, handleEditCard }) {
   const { values, setValues, errors, isValid, handleBlur, handleChange, resetForm } =
     useFormAndValidation({});
-  const selectedCard = useSelector((state) => state.cards.selectedCard);
+  const selectedCard = useSelector(selectCard);
 
   React.useEffect(() => {
     resetForm();

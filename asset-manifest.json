@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/cookbook/static/css/main.1a81fa30.css",
-    "main.js": "/cookbook/static/js/main.a466381d.js",
+    "main.js": "/cookbook/static/js/main.f951e5ea.js",
     "static/media/food.jpg": "/cookbook/static/media/food.518aa7073e0290d32fb2.jpg",
     "static/media/like.svg": "/cookbook/static/media/like.85396922b044b0b2f110.svg",
     "index.html": "/cookbook/index.html",
     "static/media/like-active.svg": "/cookbook/static/media/like-active.254c4bfa783042e01896.svg",
     "main.1a81fa30.css.map": "/cookbook/static/css/main.1a81fa30.css.map",
-    "main.a466381d.js.map": "/cookbook/static/js/main.a466381d.js.map"
+    "main.f951e5ea.js.map": "/cookbook/static/js/main.f951e5ea.js.map"
   },
   "entrypoints": [
     "static/css/main.1a81fa30.css",
-    "static/js/main.a466381d.js"
+    "static/js/main.f951e5ea.js"
   ]
 }

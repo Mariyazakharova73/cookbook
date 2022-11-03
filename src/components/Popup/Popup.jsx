@@ -57,8 +57,10 @@ function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBl
             className="popup__form-select"
             onChange={handleChange}
             onBlur={handleBlur}
+            type="text"
             required
           >
+            <option value="">Выбрать</option>
             <option className="popup__form-option" value="легко">
               легко
             </option>
@@ -66,7 +68,7 @@ function Popup({ titleText, handleSubmit, handleChange, values, errors, handleBl
               сложно
             </option>
           </select>
-          <span className="popup__form-err"></span>
+          <span className="popup__form-err">{errors.type}</span>
           <textarea
             name="ingredients"
             className="popup__form-textarea"

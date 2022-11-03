@@ -10,22 +10,18 @@ export function useFormAndValidation() {
     setValues({ ...values, [name]: value });
   };
 
-  const handleBlur= (evt) => {
-    const { name} = evt.target;
+  const handleBlur = (evt) => {
+    const { name } = evt.target;
     setErrors({ ...errors, [name]: evt.target.validationMessage });
     setIsValid(evt.target.closest('.form').checkValidity());
   };
 
-
-
   const resetForm = useCallback(
-    //значения по умолчанию
     (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    //зависимости
     [setValues, setErrors, setIsValid]
   );
 

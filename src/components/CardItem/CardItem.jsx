@@ -55,7 +55,7 @@ function CardItem({
               />
             ) : (
               <button
-                style={{ cursor: 'not-allowed' }}
+                style={{ cursor: 'text' }}
                 className={`button-like ${isLiked ? 'button-like_active' : ''}`}
                 type="button"
               />
